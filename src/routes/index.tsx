@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import {
   ArrowLeft, ArrowRight, ChevronRight, Coffee, Instagram, Leaf,
-  MapPin, Menu, Phone, ShieldCheck, ShoppingBag, Sparkles, Utensils,
+  MapPin, Menu, ShieldCheck, ShoppingBag, Sparkles, Utensils,
   X, ZoomIn, MessageCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -48,9 +48,8 @@ const testimonials = [
 ];
 
 function Brand({ light = false }: { light?: boolean }) {
-  return <a href="#home" className="block leading-none" aria-label="Urban Juice Cafe home">
-    <div className={`font-display text-[1.35rem] font-bold sm:text-2xl ${light ? "text-cream" : "text-forest"}`}>अर्बन <span className="text-lime-strong">जूस</span> कैफे</div>
-    <div className={`mt-1 text-[0.42rem] font-bold uppercase tracking-[0.23em] ${light ? "text-cream/65" : "text-forest/65"}`}>Juices • Shakes • Pizza • Good Food</div>
+  return <a href="#home" className={`inline-flex shrink-0 items-center justify-center ${light ? "h-[112px] w-[220px] rounded-md bg-cream p-1" : "h-[58px] w-[116px] sm:h-[66px] sm:w-[132px] lg:h-[72px] lg:w-[150px]"}`} aria-label="Urban Juice Cafe home">
+    <img src="/urban-juice-logo.png" alt="Urban Juice Cafe" className="h-full w-full object-fill" />
   </a>;
 }
 
@@ -82,15 +81,17 @@ function Index() {
         <div className="mx-auto grid h-8 max-w-7xl grid-cols-3 items-center px-6 text-[0.66rem]">
           <span className="flex items-center gap-1.5"><MapPin size={12}/> Shop No F11, Jayraj Nagar, UJC Vasai West</span>
           <span className="text-center tracking-wide">Fresh Juices&nbsp; | &nbsp;Tasty Food&nbsp; | &nbsp;Good Vibes</span>
-          <span className="flex items-center justify-end gap-3"><Instagram size={13}/><MessageCircle size={13}/><Phone size={12}/> +91 98765 43210</span>
+          <span className="flex items-center justify-end gap-3"><Instagram size={13}/></span>
         </div>
       </div>
       <div className="bg-cream/95 backdrop-blur-md">
-        <div className="mx-auto grid h-[74px] max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center px-5 lg:grid-cols-[1fr_auto_1fr] lg:px-6">
-          <Brand />
-          <nav className="hidden items-center gap-7 lg:flex" aria-label="Main navigation">
-            {nav.map((item) => <a key={item} href={`#${item.toLowerCase()}`} className={`relative py-3 text-xs font-bold transition-colors hover:text-lime-strong ${active === item ? "text-forest after:absolute after:inset-x-0 after:bottom-1 after:h-0.5 after:bg-lime-strong" : "text-foreground/70"}`}>{item}</a>)}
-          </nav>
+        <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5 lg:px-6">
+          <div className="flex min-w-0 items-center gap-4 lg:gap-8">
+            <Brand />
+            <nav className="hidden items-center gap-7 lg:flex" aria-label="Main navigation">
+              {nav.map((item) => <a key={item} href={`#${item.toLowerCase()}`} className={`relative py-3 text-xs font-bold transition-colors hover:text-lime-strong ${active === item ? "text-forest after:absolute after:inset-x-0 after:bottom-1 after:h-0.5 after:bg-lime-strong" : "text-foreground/70"}`}>{item}</a>)}
+            </nav>
+          </div>
           <div className="flex justify-end gap-2">
             <Button variant="cafeDark" className="hidden rounded-full lg:inline-flex" onClick={openOrder}>Order Now <ShoppingBag/></Button>
             <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileOpen((v) => !v)} aria-label="Open navigation">{mobileOpen ? <X/> : <Menu/>}</Button>
@@ -142,7 +143,7 @@ function Index() {
 
     <section className="bg-forest text-cream"><div className="relative mx-auto grid max-w-7xl items-center gap-7 overflow-hidden px-5 py-14 sm:grid-cols-[1fr_auto] lg:px-6"><Leaf className="leaf-float absolute right-[38%] top-4 h-20 w-20 text-lime/15"/><div><p className="font-script text-3xl text-lime">Fresh cravings?</p><h2 className="font-display text-4xl font-bold">Hungry Yet?</h2><p className="mt-2 max-w-lg text-sm leading-6 text-cream/75">Fresh food, refreshing drinks and good vibes are waiting for you.</p></div><div className="flex flex-col gap-3 sm:flex-row"><Button variant="cafe" size="lg" onClick={openOrder}>Order Now <ShoppingBag/></Button><Button variant="cafeOutline" size="lg" asChild><a href="https://www.google.com/maps/search/?api=1&query=Urban+Juice+Cafe%2C+Jayraj+Nagar%2C+Vasai+West" target="_blank" rel="noreferrer">Get Directions <MapPin/></a></Button></div></div></section>
 
-    <footer id="contact" className="bg-forest-deep text-cream"><div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_1fr] lg:px-6"><div><Brand light/><p className="mt-5 max-w-sm text-xs leading-6 text-cream/60">A fresh little corner in Vasai West for wholesome sips, comforting bites and happier days.</p></div><div><h3 className="mb-4 text-xs font-bold">Quick Links</h3><div className="grid grid-cols-2 gap-x-6 gap-y-2">{nav.map((item) => <a key={item} className="text-xs text-cream/65 hover:text-lime" href={`#${item.toLowerCase()}`}>{item}</a>)}</div></div><div><h3 className="mb-4 text-xs font-bold">Contact Us</h3><p className="flex gap-2 text-xs leading-5 text-cream/65"><MapPin size={15} className="shrink-0 text-lime"/>Shop No F11, Jayraj Nagar,<br/> UJC Vasai West</p><a href="tel:+919876543210" className="mt-3 flex items-center gap-2 text-xs text-cream/65 hover:text-lime"><Phone size={14}/> +91 98765 43210</a><div className="mt-4 flex gap-3"><a href="#contact" aria-label="Instagram"><Instagram size={17}/></a><a href="https://wa.me/919876543210" aria-label="WhatsApp" target="_blank" rel="noreferrer"><MessageCircle size={17}/></a></div></div></div><div className="mx-auto grid max-w-7xl gap-2 border-t border-cream/15 px-5 py-5 text-[0.62rem] text-cream/50 sm:grid-cols-2 lg:px-6"><span>© 2026 Urban Juice Cafe. All rights reserved.</span><span className="sm:text-right">Fresh Food • Fresh People • A Happier You</span></div></footer>
+    <footer id="contact" className="bg-forest-deep text-cream"><div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_1fr] lg:px-6"><div><Brand light/><p className="mt-5 max-w-sm text-xs leading-6 text-cream/60">A fresh little corner in Vasai West for wholesome sips, comforting bites and happier days.</p></div><div><h3 className="mb-4 text-xs font-bold">Quick Links</h3><div className="grid grid-cols-2 gap-x-6 gap-y-2">{nav.map((item) => <a key={item} className="text-xs text-cream/65 hover:text-lime" href={`#${item.toLowerCase()}`}>{item}</a>)}</div></div><div><h3 className="mb-4 text-xs font-bold">Contact Us</h3><p className="flex gap-2 text-xs leading-5 text-cream/65"><MapPin size={15} className="shrink-0 text-lime"/>Shop No F11, Jayraj Nagar,<br/> UJC Vasai West</p><div className="mt-4 flex gap-3"><a href="#contact" aria-label="Instagram"><Instagram size={17}/></a><a href="https://wa.me/919876543210" aria-label="WhatsApp" target="_blank" rel="noreferrer"><MessageCircle size={17}/></a></div></div></div><div className="mx-auto grid max-w-7xl gap-2 border-t border-cream/15 px-5 py-5 text-[0.62rem] text-cream/50 sm:grid-cols-2 lg:px-6"><span>© 2026 Urban Juice Cafe. All rights reserved.</span><span className="sm:text-right">Fresh Food • Fresh People • A Happier You</span></div></footer>
 
     <Dialog open={orderOpen} onOpenChange={setOrderOpen}><DialogContent className="max-h-[92vh] max-w-xl overflow-y-auto rounded-xl border-border bg-cream p-5 sm:p-7">{ordered ? <div className="py-10 text-center"><span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-lime/20 text-forest"><Sparkles size={30}/></span><DialogTitle className="mt-5 font-display text-2xl">Thanks!</DialogTitle><DialogDescription className="mx-auto mt-3 max-w-sm leading-6">Your order request has been received. Urban Juice Cafe will contact you shortly.</DialogDescription><Button variant="cafeDark" className="mt-6" onClick={() => setOrderOpen(false)}>Done</Button></div> : <><DialogHeader><DialogTitle className="font-display text-2xl text-forest">What would you like to order?</DialogTitle><DialogDescription>Pick a category, then tell us your details.</DialogDescription></DialogHeader><div className="grid grid-cols-3 gap-2">{categories.map(([name]) => <button type="button" key={name} className="rounded-lg border border-border bg-card px-2 py-3 text-xs font-semibold transition hover:border-lime hover:bg-lime/10">{name === "Fresh Juices" ? "🧃" : name === "Shakes" ? "🥤" : name === "Pizzas" ? "🍕" : name === "Panini" ? "🥪" : name === "Snacks" ? "🍟" : "🍨"}<span className="mt-1 block">{name}</span></button>)}</div><form onSubmit={submitOrder} className="mt-2 space-y-3"><Input required aria-label="Name" placeholder="Name" className="h-11 bg-card"/><Input required type="tel" aria-label="Phone" placeholder="Phone" className="h-11 bg-card"/><Select required><SelectTrigger className="h-11 bg-card"><SelectValue placeholder="Select Item"/></SelectTrigger><SelectContent>{foods.map((food) => <SelectItem key={food.name} value={food.name}>{food.name} — {food.price}</SelectItem>)}</SelectContent></Select><Input required type="number" min="1" max="20" defaultValue="1" aria-label="Quantity" className="h-11 bg-card"/><Button variant="cafeDark" size="lg" className="w-full" type="submit">Place Order <ChevronRight/></Button></form></>}</DialogContent></Dialog>
   </main>;
